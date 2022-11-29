@@ -1,9 +1,9 @@
-import Avatar from "../components/Avatar";
-import AppLayout from "../components/AppLayout";
-import { useState, useEffect } from "react";
-import Cards from "../components/Cards";
+import Avatar from '../components/Avatar'
+import AppLayout from '../components/AppLayout'
+import { useState, useEffect } from 'react'
+import Cards from '../components/Cards'
 
-export default function HomePage() {
+export default function HomePage () {
   const [timeline, setTimeline] = useState([])
 
   useEffect(() => {
@@ -15,14 +15,14 @@ export default function HomePage() {
   return (
     <>
       <AppLayout>
-        <header className="font-bold w-full fixed h-12 top-0 border-b">
+        <header className='font-bold w-full fixed h-12 top-0 border-b'>
           <Avatar />
           <h2>Inicio</h2>
-          <section className="pt-4">
+          <section className='pt-4'>
             {timeline.map(card => {
               return (
-                <Cards 
-                  key={card.id} 
+                <Cards
+                  key={card.id}
                   username={card.username}
                   avatar={card.avatar}
                   message={card.message}
@@ -32,9 +32,7 @@ export default function HomePage() {
             })}
           </section>
         </header>
-        <nav className="w-full sticky h-12 top-0 border-zinc-900 border-t">
-
-        </nav>
+        <nav className='w-full sticky h-12 top-0 border-zinc-900 border-t' />
       </AppLayout>
     </>
   )
