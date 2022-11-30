@@ -2,19 +2,16 @@ import Head from 'next/head'
 import AppLayout from '../components/AppLayout'
 import Button from '../components/Button'
 import Google from '../components/Icons/Google'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-import { loginWithGoogle, onAuthStateChanged } from '../firebase/client'
+import { loginWithGoogle } from '../firebase/client'
 
 import { useRouter } from 'next/router'
+import useUser, { USER_STATES } from '../hooks/useUser'
 
-export default function Home() {
-  const [user, setUser] = useState(undefined)
+export default function Home () {
+  const user = useUser()
   const router = useRouter()
-
-  useEffect(() => {
-    onAuthStateChanged(user => setUser(user))
-  }, [])
 
   useEffect(() => {
     user && router.replace('/home')
@@ -31,8 +28,8 @@ export default function Home() {
     <div>
       <Head>
         <title>Camus</title>
-        <meta name="description" content="Sistema de Catalogación de Museos" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='Sistema de Catalogación de Museos' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <AppLayout>
@@ -40,14 +37,14 @@ export default function Home() {
           <h1 className='font-bold text-2xl'>Camus</h1>
           <div className='mt-4'>
             {
-              user === null &&
-              <Button onClick={handleClick}>
-                <Google width={32} heigth={32} className='inline mr-1' />
-                Login with Google
-              </Button>
+              user === USER_STATES.NOT_LOGGED &&
+                <Button onClick={handleClick}>
+                  <Google width={32} heigth={32} className='inline mr-1' />
+                  Login with Google
+                </Button>
             }
             {
-              user === undefined && <span>Loading...</span> 
+              user === USER_STATES.NOT_KNOWN && <span>Loading...</span>
             }
           </div>
         </div>

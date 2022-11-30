@@ -1,7 +1,7 @@
-export default function Button({ children, onClick }) {
+export default function Button ({ children, onClick, disabled }) {
   return (
     <>
-      <button className="bg-black text-white rounded-full py-1 px-4 cursor-pointer" onClick={onClick}>
+      <button disabled={disabled} className='bg-black text-white rounded-full py-1 px-4 cursor-pointer disabled:opacity-25' onClick={onClick}>
         {children}
       </button>
     </>
