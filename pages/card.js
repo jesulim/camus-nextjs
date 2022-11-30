@@ -14,22 +14,22 @@ const COMPOSE_STATES = {
   ERROR: -1
 }
 
-const DRAG_IMAGE_STATES = {
-  ERROR: -1,
-  NONE: 0,
-  DRAG_OVER: 1,
-  UPLOADING: 2,
-  COMPLETE: 3
-}
+// const DRAG_IMAGE_STATES = {
+//   ERROR: -1,
+//   NONE: 0,
+//   DRAG_OVER: 1,
+//   UPLOADING: 2,
+//   COMPLETE: 3
+// }
 
 export default function Card () {
   const user = useUser()
   const router = useRouter()
   const [status, setStatus] = useState(COMPOSE_STATES.USER_NOT_KNOW)
 
-  const [drag, setDrag] = useState(DRAG_IMAGE_STATES.NONE)
-  const [task, setTask] = useState(null)
-  const [imgURL, setImgURL] = useState(null)
+  // const [drag, setDrag] = useState(DRAG_IMAGE_STATES.NONE)
+  // const [task, setTask] = useState(null)
+  // const [imgURL, setImgURL] = useState(null)
 
   const [nombre, setNombre] = useState('')
   const [autor, setAutor] = useState('')
@@ -71,18 +71,18 @@ export default function Card () {
 
   const handleDragEnter = e => {
     e.preventDefault()
-    setDrag(DRAG_IMAGE_STATES.DRAG_OVER)
+    // setDrag(DRAG_IMAGE_STATES.DRAG_OVER)
   }
 
   const handleDragLeave = e => {
     e.preventDefault()
-    setDrag(DRAG_IMAGE_STATES.NONE)
+    // setDrag(DRAG_IMAGE_STATES.NONE)
   }
 
   const handleDrop = e => {
     e.preventDefault()
     console.log(e.dataTransfer.file[0])
-    setDrag(DRAG_IMAGE_STATES.NONE)
+    // setDrag(DRAG_IMAGE_STATES.NONE)
   }
 
   const isButtonDisabled = !nombre.length || status === COMPOSE_STATES.LOADING

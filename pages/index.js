@@ -15,6 +15,7 @@ export default function Home () {
 
   useEffect(() => {
     user && router.replace('/home')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   const handleClick = () => {
