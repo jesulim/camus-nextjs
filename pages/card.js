@@ -34,6 +34,10 @@ export default function Card () {
 
   const [nombre, setNombre] = useState('')
   const [autor, setAutor] = useState('')
+  const [epoca, setEpoca] = useState('')
+  const [atribucion, setAtribucion] = useState('')
+  const [tecnica, setTecnica] = useState('')
+  const [numeroInv, setNumeroInv] = useState('')
   const [descripcion, setDescripcion] = useState('')
   const [image, setImage] = useState('')
 
@@ -57,12 +61,31 @@ export default function Card () {
   const handleChangeNombre = (evt) => {
     const { value } = evt.target
     setNombre(value)
-    console.log(value)
   }
 
   const handleChangeAutor = (evt) => {
     const { value } = evt.target
     setAutor(value)
+  }
+
+  const handleChangeEpoca = (evt) => {
+    const { value } = evt.target
+    setEpoca(value)
+  }
+
+  const handleChangeAtribucion = (evt) => {
+    const { value } = evt.target
+    setAtribucion(value)
+  }
+
+  const handleChangeTecnica = (evt) => {
+    const { value } = evt.target
+    setTecnica(value)
+  }
+
+  const handleChangeNumeroInv = (evt) => {
+    const { value } = evt.target
+    setNumeroInv(value)
   }
 
   const handleChangeDescripcion = (evt) => {
@@ -80,7 +103,11 @@ export default function Card () {
       descripcion,
       userId: user.uid,
       userName: user.username,
-      image: imgURL
+      image: imgURL,
+      epoca,
+      atribucion,
+      tecnica,
+      numeroInv
     }).then(() => {
       router.push('/home')
     }).then(err => {
@@ -117,7 +144,7 @@ export default function Card () {
           <title>Crear un Card - Camus</title>
         </Head>
         <Link href='/home' className='flex font-bold justify-between items-center h-12 pl-3'>
-          <h2>Inicio</h2>
+          <h2 className='px-1'>Inicio</h2>
         </Link>
         <form onSubmit={handleSubmit}>
           <div className='m-4'>
@@ -128,6 +155,22 @@ export default function Card () {
             <label className='block w-full'>
               Autor:
               <input onChange={handleChangeAutor} value={autor} className='block w-full' />
+            </label>
+            <label className='block'>
+              Epoca:
+              <input onChange={handleChangeEpoca} value={epoca} className='block w-full' />
+            </label>
+            <label className='block w-full'>
+              Atribucion:
+              <input onChange={handleChangeAtribucion} value={atribucion} className='block w-full' />
+            </label>
+            <label className='block w-full'>
+              Tecnica:
+              <input onChange={handleChangeTecnica} value={tecnica} className='block w-full' />
+            </label>
+            <label className='block w-full'>
+              N° Inventario:
+              <input onChange={handleChangeNumeroInv} value={numeroInv} className='block w-full' />
             </label>
             <label className='block'>
               Descripcion:
@@ -143,12 +186,12 @@ export default function Card () {
                 value={image}
                 className='w-full'
                 placeholder='Soltar la imagen aqui'
+                name='image'
               />
               {imgURL &&
                 <div className='relative'>
                   <button
-                    className='absolute right-3 top-3 bg-slate-700 border-0 px-2 text-white rounded-full
-            ' onClick={() => setImgURL(null)}
+                    className='absolute right-3 top-3 bg-slate-700 border-0 px-2 text-white rounded-full' onClick={() => setImgURL(null)}
                   >X
                   </button>
                   <img className='w-full h-auto rounded-md' src={imgURL} />
