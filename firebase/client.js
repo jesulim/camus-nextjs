@@ -43,11 +43,12 @@ export const loginWithGoogle = () => {
     .signInWithPopup(googleProvider)
 }
 
-export const addCard = ({ avatar, nombre, autor, descripcion, userId, userName }) => {
+export const addCard = ({ avatar, nombre, autor, image, descripcion, userId, userName }) => {
   return db.collection('cards').add({
     avatar,
     nombre,
     autor,
+    image,
     descripcion,
     userId,
     userName,
@@ -56,7 +57,9 @@ export const addCard = ({ avatar, nombre, autor, descripcion, userId, userName }
 }
 
 export const fetchLatestCards = () => {
-  return db.collection('cards')
+  return db
+    .collection('cards')
+    .orderBy('createdAt', 'desc')
     .get()
     .then(({ docs }) => {
       return docs.map(doc => {
