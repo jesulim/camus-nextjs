@@ -56,23 +56,35 @@ export const addCard = ({ avatar, nombre, autor, image, descripcion, userId, use
   })
 }
 
+const mapCardFromFirebaseToCardObject = doc => {
+  const data = doc.data()
+  const id = doc.id
+  const { createdAt } = data
+
+  return {
+    ...data,
+    id,
+    createdAt: +createdAt.toDate()
+  }
+}
+
+export const listenLatestCards = (callback) => {
+  return db
+    .collection('cards')
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(({ docs }) => {
+      const newCards = docs.map(mapCardFromFirebaseToCardObject)
+      callback(newCards)
+    })
+}
+
 export const fetchLatestCards = () => {
   return db
     .collection('cards')
     .orderBy('createdAt', 'desc')
     .get()
     .then(({ docs }) => {
-      return docs.map(doc => {
-        const data = doc.data()
-        const id = doc.id
-        const { createdAt } = data
-
-        return {
-          ...data,
-          id,
-          createdAt: +createdAt.toDate()
-        }
-      })
+      return docs.map(mapCardFromFirebaseToCardObject)
     })
 }
 
