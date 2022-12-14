@@ -1,24 +1,30 @@
 import Avatar from '../components/Avatar'
 import useTimeAgo from '../hooks/useTimeAgo'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Cards ({ avatar, nombre, autor, descripcion, id, image, userName, createdAt, userId }) {
   const timeago = useTimeAgo(createdAt)
+  const router = useRouter()
+
+  const handleArticleClick = (e) => {
+    e.preventDefault()
+    router.push(`/status/${id}`)
+  }
 
   return (
-    <article className='m-4 p-2 bg-slate-700 text-white border border-gray-500 rounded-md' key={id}>
-      <div className='mb-2'>
-        <p className='text-sm w-80'>Nombre:
-          <span className='font-normal'> {nombre}</span>
-        </p>
-        <p className='text-sm w-80 p'>Autor:
-          <span className='font-normal'> {autor}</span>
-        </p>
-        {image && <img className='py-1 w-full' src={image} />}
-      </div>
-      <div className='flex items-center'>
-        <Avatar alt={userName} src={avatar} height={24} width={24} />
-        <p className='text-xs w-80 pl-1'>{userName}</p>
-        <date className='text-xs w-80 flex justify-end'>{timeago}</date>
+    <article onClick={handleArticleClick} className='max-w-sm m-4 bg-gray-800 text-white rounded-lg shadow-xl hover:opacity-90 cursor-pointer' key={id}>
+      {image && <img className='w-full rounded-t-lg' src={image} />}
+      <div className='p-4'>
+        <p className='mb-2 text-xl font-bold tracking-tight'> {nombre}</p>
+        <p className='mb-3 font-normal text-gray-400'> {autor}</p>
+        <div className='flex items-center'>
+          <Avatar alt={userName} src={avatar} height={24} width={24} />
+          <p className='text-xs w-80 pl-1'>{userName}</p>
+          <Link href={`/status/${id}`}>
+            <time className='text-xs flex justify-end hover:underline'>{timeago}</time>
+          </Link>
+        </div>
       </div>
     </article>
   )
