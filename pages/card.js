@@ -1,4 +1,3 @@
-import AppLayout from '../components/AppLayout'
 import Button from '../components/Button'
 import useUser from '../hooks/useUser'
 import { useEffect, useState } from 'react'
@@ -139,100 +138,98 @@ export default function Card () {
 
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Crear un Card - Camus</title>
-        </Head>
-        <Link href='/home' className='flex font-bold justify-between items-center h-12 pl-3'>
-          <h2 className='px-1'>Inicio</h2>
-        </Link>
-        <form onSubmit={handleSubmit}>
-          <div className='m-4'>
-            <label className='block'>
-              Nombre:
-              <input onChange={handleChangeNombre} value={nombre} className='block w-full' />
-            </label>
-            <label className='block w-full'>
-              Autor:
-              <input onChange={handleChangeAutor} value={autor} className='block w-full' />
-            </label>
-            <label className='block'>
-              Epoca:
-              <input onChange={handleChangeEpoca} value={epoca} className='block w-full' />
-            </label>
-            <label className='block w-full'>
-              Atribucion:
-              <input onChange={handleChangeAtribucion} value={atribucion} className='block w-full' />
-            </label>
-            <label className='block w-full'>
-              Tecnica:
-              <input onChange={handleChangeTecnica} value={tecnica} className='block w-full' />
-            </label>
-            <label className='block w-full'>
-              N° Inventario:
-              <input onChange={handleChangeNumeroInv} value={numeroInv} className='block w-full' />
-            </label>
-            <label className='block'>
-              Descripcion:
-              <textarea onChange={handleChangeDescripcion} value={descripcion} className='block w-full' />
-            </label>
-            <label className='block'>
-              Imagen:
-              <textarea
+      <Head>
+        <title>Crear Card - Camus</title>
+      </Head>
+      <Link href='/home' className='flex font-bold justify-between items-center h-12 pl-3'>
+        <h2 className='px-1'>Inicio</h2>
+      </Link>
+      <form onSubmit={handleSubmit}>
+        <div className='m-4'>
+          <label className='block'>
+            Nombre:
+            <input onChange={handleChangeNombre} value={nombre} className='block w-full' />
+          </label>
+          <label className='block w-full'>
+            Autor:
+            <input onChange={handleChangeAutor} value={autor} className='block w-full' />
+          </label>
+          <label className='block'>
+            Epoca:
+            <input onChange={handleChangeEpoca} value={epoca} className='block w-full' />
+          </label>
+          <label className='block w-full'>
+            Atribucion:
+            <input onChange={handleChangeAtribucion} value={atribucion} className='block w-full' />
+          </label>
+          <label className='block w-full'>
+            Tecnica:
+            <input onChange={handleChangeTecnica} value={tecnica} className='block w-full' />
+          </label>
+          <label className='block w-full'>
+            N° Inventario:
+            <input onChange={handleChangeNumeroInv} value={numeroInv} className='block w-full' />
+          </label>
+          <label className='block'>
+            Descripcion:
+            <textarea onChange={handleChangeDescripcion} value={descripcion} className='block w-full' />
+          </label>
+          <label className='block'>
+            Imagen:
+            <textarea
+              onChange={setImage}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              value={image}
+              className='w-full'
+              placeholder='Soltar la imagen aqui'
+              name='image'
+            />
+            {imgURL &&
+              <div className='relative'>
+                <button
+                  className='absolute right-3 top-3 bg-slate-700 border-0 px-2 text-white rounded-full' onClick={() => setImgURL(null)}
+                >X
+                </button>
+                <img className='w-full h-auto rounded-md' src={imgURL} />
+              </div>}
+          </label>
+          {/* <div>
+            <label
+              class='flex justify-center w-full h-24 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none'
+            >
+              <span class='flex items-center space-x-2'>
+                <svg
+                  class='w-6 h-6 mr-1 text-current-50' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    stroke-linecap='round' stroke-linejoin='round' stroke-width='2'
+                    d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'
+                  />
+                </svg>
+                <span class='font-medium text-gray-600'>
+                  Coloque una imagen o navegue
+                </span>
+              </span>
+              <input
                 onChange={setImage}
                 onDragEnter={handleDragEnter}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 value={image}
-                className='w-full'
-                placeholder='Soltar la imagen aqui'
+                className='w-full hidden'
                 name='image'
+                type='file'
               />
-              {imgURL &&
-                <div className='relative'>
-                  <button
-                    className='absolute right-3 top-3 bg-slate-700 border-0 px-2 text-white rounded-full' onClick={() => setImgURL(null)}
-                  >X
-                  </button>
-                  <img className='w-full h-auto rounded-md' src={imgURL} />
-                </div>}
             </label>
-            {/* <div class=''>
-              <label
-                class='flex justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none'
-              >
-                <span class='flex items-center space-x-2'>
-                  <svg
-                    class='w-6 h-6 mr-1 text-current-50' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      stroke-linecap='round' stroke-linejoin='round' stroke-width='2'
-                      d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'
-                    />
-                  </svg>
-                  <span class='font-medium text-gray-600'>
-                    Coloque una imagen o navegue
-                  </span>
-                </span>
-                <input
-                  onDragEnter={handleDragEnter}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  value={descripcion}
-                  className='w-full hidden'
-                  type='file'
-                  name='file_upload'
-                  class='hidden'
-                />
-              </label>
-            </div> */}
-            <div className='my-4 w-full flex justify-center'>
-              <Button disabled={isButtonDisabled}>Crear</Button>
-            </div>
+          </div> */}
+          <div className='my-4 w-full flex justify-center'>
+            <Button disabled={isButtonDisabled}>Crear</Button>
           </div>
-        </form>
-      </AppLayout>
+        </div>
+      </form>
     </>
   )
 }
